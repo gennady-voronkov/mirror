@@ -1,0 +1,36 @@
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: ClusterConfiguration
+kubernetesVersion: stable
+apiServer:
+  certSANs:
+  - "127.0.0.1"
+  - "kubemaster"
+  - "kubernetes.default"
+  - "kubernetes.default.svc"
+  - "kubernetes.default.svc.cluster"
+  - "kubernetes.svc.cluster.local"
+  - "10.207.229.97"
+  - "10.207.229.50"
+  - "10.207.229.231"
+  - "10.207.229.64"
+  - "10.244.118.5"
+  - "10.244.117.86"
+  - "10.244.117.92"
+  - "10.244.117.228"
+  - "0.0.0.0"
+  - "so-etcd1"
+  - "so-etcd2"
+  - "so-etcd3"
+controlPlaneEndpoint: "newcluster.k8s.cec.lab.emc.com:6443"
+etcd:
+    external:
+        endpoints:
+        - https://so-etcd1:2379
+        - https://so-etcd2:2379
+        - https://so-etcd3:2379
+        caFile: /etc/kubernetes/pki/etcd/ca.crt
+        certFile: /etc/kubernetes/pki/apiserver-etcd-client.crt
+        keyFile: /etc/kubernetes/pki/apiserver-etcd-client.key
+networking:
+  podSubnet: 10.5.0.0/16
+  serviceSubnet: "10.42.0.0/16"
